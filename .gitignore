@@ -1,0 +1,18 @@
+# Dependencies and Vite build output
+node_modules/
+dist/
+
+# Local environment files (keep shared examples)
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# Local credentials
+.aws/
+
+# Operating system files
+.DS_Store
+Thumbs.db
