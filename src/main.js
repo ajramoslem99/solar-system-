@@ -24,10 +24,7 @@ class App {
     this.#camera = new THREE.PerspectiveCamera(50, aspect, 0.1, 1000);
     this.#camera.position.set(0, 0, 100);
 
-    this.#orbits = new OrbitControls(
-      this.#camera,
-      this.#renderer.domElement,
-    );
+    this.#orbits = new OrbitControls(this.#camera, this.#renderer.domElement);
     this.#orbits.enableDamping = true;
     this.#orbits.target.set(0, 0, 0);
     this.#orbits.update();
@@ -62,7 +59,20 @@ class App {
     this.#renderer.render(this.#scene, this.#camera);
   }
 
-  #onWidowsResize() {}
+  #onWidowsResize() {
+    const canvas = this.#renderer.domElement;
+    const dpr = window.devicePixelRatio;
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    const aspect = w / h;
+
+    canvas.width = w + "px";
+    canvas.height = h + "px";
+
+    this.#renderer.setSize(w * dpr, h * dpr);
+    this.#camera.aspect = aspect;
+    this.#camera.updateProjectionMatrix();
+  }
 }
 
 const app = new App();
